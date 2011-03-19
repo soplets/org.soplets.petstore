@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+  <session-factory>
+    <property name="connection.url">jdbc:derby:TEST_DB;create=true</property>
+    <property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+    <property name="dialect">org.hibernate.dialect.DerbyDialect</property>
+
+    <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>    
+    
+    <mapping class="org.petstore.entity.MCustomer" />
+    <mapping class="org.petstore.entity.MOrder" />
+    <mapping class="org.petstore.entity.MOrderDetail" />
+
+  </session-factory>
+
+</hibernate-configuration>
