@@ -19,6 +19,31 @@ import org.petstore.util.BindableEntity;
 @Soplet(aspects={Artifact.class, Beanable.class, Validatable.class, Translatable.class})
 public enum SopOrder implements BindableEntity, Translatable {  
   
+	@Sop(
+		textEN = "Address",
+		textDE = "Anschrift", 
+		description = "The address of the customer",
+		javaType = String.class,
+		length = 255)
+	address,
+
+	@Sop(
+		textEN = "Phone number",
+		textDE = "Telefonnummer", 
+		description = "The phone number of the customer",
+		javaType = String.class,
+		length = 20,
+		validator = SopValidators.phonePattern)
+	phone,
+
+	@Sop( 
+		textEN = "Order time",
+		textDE = "Bestellzeitpunkt", 
+		description = "Time when the order has been placed",
+		javaType = Date.class,
+		readOnly = true)
+	orderTime,
+
 	@ManyToOne(
 		targetEntity=MCustomer.class)
 	@Sop( 
@@ -29,33 +54,6 @@ public enum SopOrder implements BindableEntity, Translatable {
 		javaType = MCustomer.class,
 		mandatory = true) 
 	customer, 
- 
-	@Sop( 
-		textEN = "Order time",
-		textDE = "Bestellzeitpunkt", 
-		description = "Time when the order has been placed",
-		javaType = Date.class,
-		readOnly = true)
-	orderTime,
-
-	@Sop(
-		textEN = "Address",
-		textDE = "Anschrift", 
-		description = "The address of the customer",
-		javaType = String.class,
-		readOnly = false,
-		length = 255)
-	address,
-
-	@Sop(
-		textEN = "Phone number",
-		textDE = "Telefonnummer", 
-		description = "The phone number of the customer",
-		javaType = String.class,
-		readOnly = false,
-		length = 20,
-		validator = SopValidators.phonePattern)
-	phone,
 
 	@Sop(
 		textEN = "Region",

@@ -2,9 +2,9 @@ package org.petstore.soplets;
 
 import lombok.Soplet;
 
-import org.petstore.aspects.Problemable;
+import org.petstore.aspects.Loggable;
 
-@Soplet(aspects=Problemable.class)
+@Soplet(aspects=Loggable.class)
 public enum SopExceptions {
 	
 	@Sop(

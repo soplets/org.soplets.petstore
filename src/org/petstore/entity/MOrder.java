@@ -21,4 +21,3 @@ public class MOrder extends MBase {
 		return customer + " (" + date + ")"; 
 	} 
 }
- 
