@@ -7,19 +7,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Soplet;
+import lombok.soplets.Beanable;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
-import org.petstore.aspects.Beanable;
+import org.petstore.aspects.Beanable2;
 import org.petstore.aspects.Translatable;
 import org.petstore.aspects.Validatable;
 import org.petstore.entity.MCustomer;
 import org.petstore.entity.MOrderDetail;
 import org.petstore.util.BindableEntity;
 
-@Soplet(aspects={Artifact.class, Beanable.class, Validatable.class, Translatable.class})
+@Sop(aspects={Artifact.class, Beanable.class, Beanable2.class, Validatable.class, Translatable.class})
 public enum SopOrder implements BindableEntity, Translatable {  
   
-	@Sop(
+	@Soplet(
 		textEN = "Address",
 		textDE = "Anschrift", 
 		description = "The address of the customer",
@@ -27,7 +29,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 		length = 255)
 	address,
 
-	@Sop(
+	@Soplet(
 		textEN = "Phone number",
 		textDE = "Telefonnummer", 
 		description = "The phone number of the customer",
@@ -36,7 +38,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 		validator = SopValidators.phonePattern)
 	phone,
 
-	@Sop( 
+	@Soplet( 
 		textEN = "Order time",
 		textDE = "Bestellzeitpunkt", 
 		description = "Time when the order has been placed",
@@ -46,7 +48,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 
 	@ManyToOne(
 		targetEntity=MCustomer.class)
-	@Sop( 
+	@Soplet( 
 		textEN = "Customer",
 		textDE = "Kunde", 
 		description = "The person which ordered the pizza",
@@ -55,7 +57,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 		mandatory = true) 
 	customer, 
 
-	@Sop(
+	@Soplet(
 		textEN = "Region",
 		textDE = "Region", 
 		description = "Classification for the distance to the customer",
@@ -66,7 +68,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 
 	@OneToMany(
 		targetEntity = MOrderDetail.class)
-	@Sop(
+	@Soplet(
 		textEN = "Order details",
 		textDE = "Bestellliste", 
 		description = "The items which comprise an order",
@@ -76,7 +78,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 //		multiplicity = SopMultiplicity.oneToMany)
 	details,
 	
-	@Sop(
+	@Soplet(
 		textEN = "",
 		textDE = "",
 		description = "",

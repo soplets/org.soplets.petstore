@@ -6,12 +6,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import lombok.SopEntity;
+import lombok.soplets.SopBean;
 
 import org.petstore.soplets.SopOrder;
 
 @Entity
-@SopEntity(type=SopOrder.class) 
+@SopBean(sopRef=SopOrder.class) 
 public class MOrder extends MBase {
 	
 	@Override 

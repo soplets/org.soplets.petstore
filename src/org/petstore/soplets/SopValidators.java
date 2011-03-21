@@ -4,14 +4,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 import lombok.Soplet;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
 import org.petstore.aspects.Translatable;
 
-@Soplet(aspects={Artifact.class, Translatable.class})
+@Sop(aspects={Artifact.class, Translatable.class})
 public enum SopValidators {
 	
-	@Sop(
+	@Soplet(
 		description = "Checks if a date is current or in the past", 
 		textEN = "Date must not be in the future",
 		textDE = "Datum darf nicht in der Zukunft liegen")
@@ -28,7 +29,7 @@ public enum SopValidators {
 		}
 	},
 	
-	@Sop(
+	@Soplet(
 		description = "", 
 		textEN = "Invalid phone number",
 		textDE = "")

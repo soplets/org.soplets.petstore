@@ -7,17 +7,17 @@ import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
-import lombok.Soplet;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
 import org.petstore.aspects.Privilegable;
 import org.petstore.dao.DaoOrder;
 import org.petstore.entity.MOrder;
 
-@Soplet(aspects={Artifact.class, Privilegable.class})
+@Sop(aspects={Artifact.class, Privilegable.class})
 public enum SopActions {
 	
-	@Sop(
+	@Soplet(
 		description="Reloads the current set of orders in the main window",
 		roles=SopRoles.ANY)
 	reloadOrders {
@@ -37,7 +37,7 @@ public enum SopActions {
 		}
 	},
 	
-	@Sop(
+	@Soplet(
 		description="Delete an existing order (requires chief privileges!)",
 		roles=SopRoles.chief)
 	deleteOrder {

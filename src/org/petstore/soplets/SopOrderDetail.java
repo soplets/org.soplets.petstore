@@ -1,17 +1,16 @@
 package org.petstore.soplets;
 
-import lombok.Soplet;
+import lombok.soplets.Beanable;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
-import org.petstore.aspects.Beanable;
+import org.petstore.aspects.Beanable2;
 import org.petstore.aspects.Translatable;
 
-import javax.persistence.*;
-
-@Soplet(aspects={Artifact.class, Translatable.class, Beanable.class})
+@Sop(aspects={Artifact.class, Translatable.class, Beanable.class, Beanable2.class})
 public enum SopOrderDetail {
 
-	@Sop (
+	@Soplet (
 		textEN = "",
 		textDE = "",
 		description = "",
@@ -20,8 +19,7 @@ public enum SopOrderDetail {
 //		viewPrivilege=SopPrivilege.viewEarnings)
 	earnings,
 
-//	@Enumerated(EnumType.STRING)
-	@Sop (
+	@Soplet (
 		textEN = "Order Text",
 		textDE = "Bestellung",
 		description = "The thing to be ordered",
@@ -29,7 +27,7 @@ public enum SopOrderDetail {
 		javaType = SopArticle.class)
 	article,
 
-	@Sop (
+	@Soplet (
 		textEN = "Quantity",
 		textDE = "Menge",
 		readOnly = true,
@@ -37,7 +35,7 @@ public enum SopOrderDetail {
 		javaType = Integer.class)
 	quantity,
 
-	@Sop (
+	@Soplet (
 		textEN = "",
 		textDE = "",
 		description = "",
@@ -45,7 +43,7 @@ public enum SopOrderDetail {
 		javaType = Double.class)
 	pricePerUnit,
 
-	@Sop (
+	@Soplet (
 		textEN = "",
 		textDE = "",
 		description = "",

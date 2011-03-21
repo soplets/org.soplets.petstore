@@ -1,17 +1,18 @@
 package org.petstore.soplets;
 
 import lombok.Soplet;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
 
-@Soplet(aspects=Artifact.class)
+@Sop(aspects=Artifact.class)
 public enum SopRoles {
 
-	@Sop(
+	@Soplet(
 		description="The guy taking the orders")
 	clerk,
 	
-	@Sop(
+	@Soplet(
 		description="The boss!")
 	chief,
 	

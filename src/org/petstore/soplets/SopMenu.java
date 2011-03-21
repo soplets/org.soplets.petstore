@@ -1,33 +1,35 @@
 package org.petstore.soplets;
 
+import lombok.Soplet;
+import lombok.soplets.Sop;
+
 import org.petstore.aspects.Menuable;
 import org.petstore.aspects.Translatable;
 
-@lombok.Soplet(aspects={Translatable.class, Menuable.class})
-public enum SopMenus {
+@Sop(aspects={Translatable.class, Menuable.class})
+public enum SopMenu {
 	
 	NULL,
 	
-	@Sop(
+	@Soplet(
 		textEN = "Reload orders",
 		textDE = "Bestellung laden")
 	orders,
 	 
-	@Sop(
-		parent = SopMenus.orders,
+	@Soplet(
+		parent = SopMenu.orders,
 		action = SopActions.reloadOrders, 
 		textEN = "Reload orders",
 		textDE = "Bestellung laden")
 	reloadOrders,
 	 
-	@Sop(
-		parent = SopMenus.orders,
+	@Soplet(
+		parent = SopMenu.orders,
 		action = SopActions.deleteOrder, 
 		textEN = "Delete order",
 		textDE = "Bestellung löschen")
 	deleteOrder,
 	
 	aboutDialog;
-	
 
 }

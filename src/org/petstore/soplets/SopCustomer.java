@@ -1,15 +1,16 @@
 package org.petstore.soplets;
 
-import lombok.Soplet;
+import lombok.soplets.Beanable;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
-import org.petstore.aspects.Beanable;
+import org.petstore.aspects.Beanable2;
 import org.petstore.aspects.Translatable;
 
-@Soplet(aspects={Artifact.class, Beanable.class, Translatable.class})
+@Sop(aspects={Artifact.class, Beanable.class, Beanable2.class, Translatable.class})
 public enum SopCustomer {
 
-	@Sop (
+	@Soplet (
 		textEN = "Zip code",
 		textDE = "PLZ", 
 		description = "The postal code of the place where the customer lives",
@@ -17,28 +18,28 @@ public enum SopCustomer {
 		length = 5)
 	zipCode,
 	 
-	@Sop (
+	@Soplet (
 		textEN = "",
 		textDE = "", 
 		description = "",
 		javaType = String.class)
 	name,
 	
-	@Sop (
+	@Soplet (
 		textEN = "",
 		textDE = "", 
 		description = "",
 		javaType = String.class)
 	address,
 	
-	@Sop (
+	@Soplet (
 		textEN = "",
 		textDE = "", 
 		description = "",
 		javaType = String.class)
 	phone,
 
-	@Sop (
+	@Soplet (
 		textEN = "",
 		textDE = "", 
 		description = "",

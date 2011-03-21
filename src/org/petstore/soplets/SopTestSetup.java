@@ -2,17 +2,20 @@ package org.petstore.soplets;
 
 import java.util.Calendar;
 
+import lombok.soplets.Sop;
+
 import org.petstore.aspects.Artifact;
 import org.petstore.dao.DaoCustomer;
 import org.petstore.dao.DaoOrder;
 import org.petstore.entity.MCustomer;
 import org.petstore.entity.MOrder;
 import org.petstore.entity.MOrderDetail;
+import org.petstore.soplets.SopOrderDetail.Soplet;
 
-@lombok.Soplet(aspects=Artifact.class)
+@Sop(aspects=Artifact.class)
 public enum SopTestSetup {
 
-	@Sop(
+	@Soplet(
 		description= "")
 	simpleCustomer {
 		@Override
@@ -31,7 +34,7 @@ public enum SopTestSetup {
 		}
 	},
 
-	@Sop(
+	@Soplet(
 		/* requires=simpleCustomer */
 		description= "")
 	simpleOrder {

@@ -3,11 +3,11 @@ package org.petstore.soplets;
 import java.util.Calendar;
 
 import lombok.Soplet;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
 import org.petstore.aspects.Translatable;
 import org.petstore.soplets.SopArticle.Priceable;
-import org.petstore.soplets.SopMenus.Sop;
 
 
 /**
@@ -33,38 +33,38 @@ import org.petstore.soplets.SopMenus.Sop;
  * 
  * @author chrismay
  */
-@Soplet(aspects = {Artifact.class, Translatable.class, Priceable.class})
+@Sop(aspects = {Artifact.class, Translatable.class, Priceable.class})
 public enum SopArticle {
 
-	@Sop(
+	@Soplet(
 		textEN = "",
 		textDE = "",
 		description = "",
 		price = 6.5f)
 	pizzaMargarita,
 
-	@Sop(
+	@Soplet(
 		textEN = "",
 		textDE = "",
 		description = "",
 		price = 8.25f)
 	pizzaNapoli,
 
-	@Sop(
+	@Soplet(
 		textEN = "",
 		textDE = "",
 		description = "",
 		price = 1.50f)
 	coke,
 	
-	@Sop(
+	@Soplet(
 		textEN = "",
 		textDE = "",
 		description = "",
 		price = 1.75f)
 	beerHeineken,
 	
-	@Sop(
+	@Soplet(
 		textEN = "Friday Combo",
 		textDE = "Freitag's Combo",
 		description = "Special offer for 1 pizza + 1 beverage, only 7.99€ Fridays, 9.99€ the other days")

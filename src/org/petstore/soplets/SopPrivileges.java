@@ -1,14 +1,15 @@
 package org.petstore.soplets;
 
 import lombok.Soplet;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
 import org.petstore.aspects.Privilegable;
 
-@Soplet(aspects={Artifact.class, Privilegable.class})
+@Sop(aspects={Artifact.class, Privilegable.class})
 public enum SopPrivileges {
 
-	@Sop (
+	@Soplet (
 		description="View the earnings of an order or order detail",	
 		roles=SopRoles.chief)
 	viewEarnings;	

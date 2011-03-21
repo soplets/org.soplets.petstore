@@ -1,16 +1,16 @@
 package org.petstore.soplets;
 
 import lombok.Soplet;
+import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
 import org.petstore.aspects.Translatable;
 import org.petstore.soplets.SopRegion.Regionable;
-import org.petstore.test.HPTest;
 
-@Soplet(aspects = {Artifact.class, Translatable.class, Regionable.class})
+@Sop(aspects = {Artifact.class, Translatable.class, Regionable.class})
 public enum SopRegion {
 
-	@Sop(
+	@Soplet(
 		textEN = "Inner city", 
 		textDE = "Innenstadt",
 		description = "Inner area of the city (max. 5 kms)",  
@@ -18,7 +18,7 @@ public enum SopRegion {
 		surcharge = 0.0f)
 	innerCity,
 	  
-	@Sop(
+	@Soplet(
 		textEN = "Outer city",
 		textDE = "Aussenbezirke",
 		description = "Outer area of the city (max. 10 kms)",  
@@ -26,7 +26,7 @@ public enum SopRegion {
 		surcharge = 2.0f)
 	outerCity,
 	
-	@Sop(
+	@Soplet(
 		textEN = "Outside of city",
 		textDE = "Ausserhalb der Stadt",
 		description = "Anything which is beyond the outer city.\n" +
@@ -45,6 +45,9 @@ public enum SopRegion {
 		return surcharge();
 	}
 
+	/**
+	 * describes extra properties for a region type
+	 */
 	public static @interface Regionable {
 		
 		public double minimumDelivery() default 0;

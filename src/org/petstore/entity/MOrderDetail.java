@@ -2,12 +2,12 @@ package org.petstore.entity;
 
 import javax.persistence.Entity;
 
-import lombok.SopEntity;
+import lombok.soplets.SopBean;
 
 import org.petstore.soplets.SopArticle;
 import org.petstore.soplets.SopOrderDetail;
 
 @Entity
-@SopEntity(type=SopOrderDetail.class)
+@SopBean(sopRef=SopOrderDetail.class)
 public class MOrderDetail extends MBase {
 }
