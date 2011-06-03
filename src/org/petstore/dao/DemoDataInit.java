@@ -1,31 +1,17 @@
 package org.petstore.dao;
 
 import java.util.List;
-import java.util.Vector;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.petstore.entity.MCustomer;
-import org.petstore.entity.MOrder;
-import org.petstore.soplets.SopExceptions;
+import org.petstore.soplets.SopException;
 import org.petstore.util.PizzaLogger;
 import org.petstore.util.PizzaUtil;
 
-public class DaoCustomer {
+public class DemoDataInit {
 
-	private static DaoCustomer INSTANCE;
-
-	public static DaoCustomer getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new DaoCustomer();
-		}
-		return INSTANCE;
-	}
-	
-	private DaoCustomer(){		
-	}
-
-	public List<MCustomer> loadCustomer() {
+	public static void init() {
 		Session session = null;
 		try {
 			session = PizzaUtil.getSessionFactory().openSession();
@@ -40,25 +26,16 @@ public class DaoCustomer {
 	        	c2.setName("Donald Duck");
 	        	session.save(c2);
 	        	list.add(c2);
+	        	MCustomer c3 = new MCustomer();
+	        	c3.setName("Tick, Trick & Track");
+	        	session.save(c3);
+	        	list.add(c3);
 	        }
-	        return list;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			PizzaLogger.log(SopExceptions.EX_0002, ex);
-			return new Vector<MCustomer>();
+			PizzaLogger.log(SopException.EX_0002, ex);
 		} finally {
 			session.close();
 		}
 	}
-	
-	public void save(MCustomer customer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public MCustomer findByName(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

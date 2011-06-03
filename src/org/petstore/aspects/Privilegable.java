@@ -1,8 +1,8 @@
 package org.petstore.aspects;
 
-import org.petstore.soplets.SopRoles;
+import org.petstore.soplets.SopRole;
 
 public @interface Privilegable {
 
-	public SopRoles[] roles();
+	public SopRole[] roles();
 }

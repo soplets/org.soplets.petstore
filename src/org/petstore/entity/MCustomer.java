@@ -11,7 +11,7 @@ import org.petstore.soplets.SopRegion;
 @SopBean(sopRef=SopCustomer.class) 
 public class MCustomer extends MBase {
 	
-    public String toString() {
+    public String toString() { 
     	return name; 
     }
 }

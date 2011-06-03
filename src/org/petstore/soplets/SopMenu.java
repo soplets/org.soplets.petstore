@@ -1,6 +1,5 @@
 package org.petstore.soplets;
 
-import lombok.Soplet;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Menuable;
@@ -18,14 +17,14 @@ public enum SopMenu {
 	 
 	@Soplet(
 		parent = SopMenu.orders,
-		action = SopActions.reloadOrders, 
+		action = SopAction.reloadOrders, 
 		textEN = "Reload orders",
 		textDE = "Bestellung laden")
 	reloadOrders,
 	 
 	@Soplet(
 		parent = SopMenu.orders,
-		action = SopActions.deleteOrder, 
+		action = SopAction.deleteOrder, 
 		textEN = "Delete order",
 		textDE = "Bestellung löschen")
 	deleteOrder,

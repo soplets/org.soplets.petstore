@@ -1,6 +1,5 @@
 package org.petstore.soplets;
 
-import lombok.Soplet;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;

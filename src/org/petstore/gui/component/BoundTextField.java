@@ -16,11 +16,13 @@ import org.petstore.util.BindableEntity;
 @DemoFeature(Feature.binding)
 public class BoundTextField<T> extends JTextField implements Bindable<T> {
 
+	private static final long serialVersionUID = 1L;
+
 	private BindableEntity fieldDef;
 
 	public void bind(BindableEntity fieldDef) {
 		this.fieldDef = fieldDef;
-		setDocument(new TextFieldLimiter(fieldDef.length()));
+		setDocument(new TextFieldLimiter(fieldDef.length()));  //set maxLength
 		setColumns(fieldDef.length());
 	}
 
@@ -29,7 +31,7 @@ public class BoundTextField<T> extends JTextField implements Bindable<T> {
 			setText(fieldDef.defaultValue() + "");
 			return;
 		}
-		Class clazz = entity.getClass();
+		Class<?> clazz = entity.getClass();
 		String getterName = fieldDef.name();
 		getterName = getterName.substring(0, 1).toUpperCase()
 				+ getterName.substring(1);
@@ -37,7 +39,7 @@ public class BoundTextField<T> extends JTextField implements Bindable<T> {
 		try {
 			Method getter = clazz.getMethod(getterName);
 			Object value = getter.invoke(entity);
-			Class dataType = fieldDef.javaType();
+			Class<?> dataType = fieldDef.javaType();
 			String formattedText = value + ""; //TODO dataType.doFormat(value); 
 			setText(formattedText);
 		} catch (Exception e) {
@@ -49,20 +51,16 @@ public class BoundTextField<T> extends JTextField implements Bindable<T> {
 		if (entity == null) {
 			return;
 		}
-		Class clazz = entity.getClass();
+		Class<?> clazz = entity.getClass();
 		String setterName = fieldDef.name();
 		setterName = setterName.substring(0, 1).toUpperCase()
 				+ setterName.substring(1);
 		setterName = "set" + setterName;
 		SopValidators validator = null;
 		try {
-//			//parse value
-//			SopInputParser parser = fieldDef.getParser();
-//			Object parsedValue = parser.doParse(getText());
-//			
 			try {
 				validator = fieldDef.validator();
-			} catch (IllegalArgumentException ee) {			
+			} catch (IllegalArgumentException ee) {
 			}
 			
 			//validate value, may throw an IllegalArgumentException
@@ -76,7 +74,7 @@ public class BoundTextField<T> extends JTextField implements Bindable<T> {
 			setToolTipText("");
 
 			//apply the value
-			Class dataType = fieldDef.javaType();
+			Class<?> dataType = fieldDef.javaType();
 			Method setter = clazz.getMethod(setterName, dataType);			
 			setter.invoke(entity, getText()); //TODO parsedValue);
 		} catch (IllegalArgumentException iae) {
@@ -89,7 +87,11 @@ public class BoundTextField<T> extends JTextField implements Bindable<T> {
 		}
 	}
 
-	private class TextFieldLimiter extends PlainDocument {
+	class TextFieldLimiter extends PlainDocument {
+		
+		private static final long serialVersionUID = 1L;
+
+		//the max length of characters
 		int maxChar = -1;
 
 		public TextFieldLimiter(int len) {

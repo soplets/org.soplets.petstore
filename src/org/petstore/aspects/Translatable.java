@@ -5,5 +5,6 @@ public @interface Translatable {
 
 	public String textDE();
 	public String textEN();
+	public String textFR() default "";
 
 }

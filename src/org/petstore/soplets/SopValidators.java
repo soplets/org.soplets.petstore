@@ -3,7 +3,6 @@ package org.petstore.soplets;
 import java.util.Calendar;
 import java.util.Date;
 
-import lombok.Soplet;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;

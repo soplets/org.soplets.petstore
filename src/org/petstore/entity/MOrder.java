@@ -1,4 +1,4 @@
-package org.petstore.entity;
+ package org.petstore.entity;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import lombok.soplets.SopBean;
 
+import org.petstore.soplets.SopRegion;
 import org.petstore.soplets.SopOrder;
 
 @Entity

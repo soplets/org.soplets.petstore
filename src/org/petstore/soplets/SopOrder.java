@@ -3,27 +3,28 @@ package org.petstore.soplets;
 import java.awt.List;
 import java.util.Date;
 
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import lombok.Soplet;
 import lombok.soplets.Beanable;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
-import org.petstore.aspects.Beanable2;
+import org.petstore.aspects.Editable;
 import org.petstore.aspects.Translatable;
 import org.petstore.aspects.Validatable;
 import org.petstore.entity.MCustomer;
 import org.petstore.entity.MOrderDetail;
 import org.petstore.util.BindableEntity;
 
-@Sop(aspects={Artifact.class, Beanable.class, Beanable2.class, Validatable.class, Translatable.class})
+@Sop(aspects={Artifact.class, Beanable.class, Editable.class, Validatable.class, Translatable.class})
 public enum SopOrder implements BindableEntity, Translatable {  
-  
+ 
 	@Soplet(
 		textEN = "Address",
-		textDE = "Anschrift", 
+		textDE = "Anschrift",
+		textFR = "",
 		description = "The address of the customer",
 		javaType = String.class,
 		length = 255)
@@ -46,7 +47,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 		readOnly = true)
 	orderTime,
 
-	@ManyToOne(
+	@ManyToOne(  //this annotation will be woven into the MOrder class
 		targetEntity=MCustomer.class)
 	@Soplet( 
 		textEN = "Customer",
@@ -62,12 +63,12 @@ public enum SopOrder implements BindableEntity, Translatable {
 		textDE = "Region", 
 		description = "Classification for the distance to the customer",
 		readOnly = false,
-		javaType = String.class) //List.class)
-//		list = SopListMasterImpl.sopRegion)  
+		javaType = SopRegion.class)  
 	region,
 
-	@OneToMany(
-		targetEntity = MOrderDetail.class)
+	@OneToMany(  //this annotation will be woven into the MOrder class
+		targetEntity = MOrderDetail.class,
+		fetch=FetchType.EAGER)
 	@Soplet(
 		textEN = "Order details",
 		textDE = "Bestellliste", 

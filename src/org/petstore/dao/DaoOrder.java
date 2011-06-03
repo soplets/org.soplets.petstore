@@ -5,13 +5,9 @@ import java.util.Vector;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.petstore.entity.MCustomer;
 import org.petstore.entity.MOrder;
 import org.petstore.entity.MOrderDetail;
-import org.petstore.soplets.SopArticle;
-import org.petstore.soplets.SopExceptions;
+import org.petstore.soplets.SopException;
 import org.petstore.util.PizzaLogger;
 import org.petstore.util.PizzaUtil;
 
@@ -35,10 +31,14 @@ public class DaoOrder {
 		try {
 			session = PizzaUtil.getSessionFactory().openSession();
 			session.beginTransaction();
+			for (Object o : order.getDetails()) {
+				MOrderDetail detail = (MOrderDetail)o;
+				session.saveOrUpdate(o);
+			}
 			session.saveOrUpdate(order);
 			session.getTransaction().commit();
 		} catch (Exception ex) {
-			PizzaLogger.log(SopExceptions.EX_0002, ex);
+			PizzaLogger.log(SopException.EX_0002, ex);
 		} finally {
 			session.close();
 		}
@@ -51,7 +51,7 @@ public class DaoOrder {
 	        Criteria c = session.createCriteria(MOrder.class);
 	        return (List<MOrder>)c.list();
 		} catch (Exception ex) {
-			PizzaLogger.log(SopExceptions.EX_0002, ex);
+			PizzaLogger.log(SopException.EX_0002, ex);
 			return new Vector<MOrder>();
 		} finally {
 			session.close();
@@ -64,7 +64,7 @@ public class DaoOrder {
 			session = PizzaUtil.getSessionFactory().openSession();
 			session.delete(order);
 		} catch (Exception ex) {
-			PizzaLogger.log(SopExceptions.EX_0002, ex);
+			PizzaLogger.log(SopException.EX_0002, ex);
 		} finally {
 			session.close();
 		}

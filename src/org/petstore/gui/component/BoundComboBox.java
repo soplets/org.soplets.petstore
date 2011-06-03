@@ -6,13 +6,13 @@ import javax.swing.JComboBox;
 
 import org.petstore.Feature;
 import org.petstore.Feature.DemoFeature;
-import org.petstore.soplets.SopOrder;
-import org.petstore.soplets.SopRegion;
 import org.petstore.util.BindableEntity;
 
 @DemoFeature(Feature.binding)
 public class BoundComboBox<T> extends JComboBox implements Bindable<T> {
 
+	private static final long serialVersionUID = 1L;
+	
 	private BindableEntity field;
 
 	public void load(T entity) {
@@ -20,7 +20,7 @@ public class BoundComboBox<T> extends JComboBox implements Bindable<T> {
 			setSelectedItem(null);
 			return;
 		}
-		Class clazz = entity.getClass();
+		Class<?> clazz = entity.getClass();
 		String getterName = field.name();
 		getterName = getterName.substring(0, 1).toUpperCase()
 				+ getterName.substring(1);
@@ -38,13 +38,13 @@ public class BoundComboBox<T> extends JComboBox implements Bindable<T> {
 		if (entity == null) {
 			return;
 		}
-		Class clazz = entity.getClass();
+		Class<?> clazz = entity.getClass();
 		String setterName = field.name();
 		setterName = setterName.substring(0, 1).toUpperCase() + setterName.substring(1);
 		setterName = "set" + setterName;
 		try {
 			//apply the value
-			Class javaType = field.javaType();
+			Class<?> javaType = field.javaType();
 			Method setter = clazz.getMethod(setterName, javaType);			
 			setter.invoke(entity, getSelectedItem());
 		} catch (Exception e) {

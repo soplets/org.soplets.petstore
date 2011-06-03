@@ -15,11 +15,11 @@ import org.petstore.dao.DaoOrder;
 import org.petstore.entity.MOrder;
 
 @Sop(aspects={Artifact.class, Privilegable.class})
-public enum SopActions {
+public enum SopAction {
 	
 	@Soplet(
 		description="Reloads the current set of orders in the main window",
-		roles=SopRoles.ANY)
+		roles=SopRole.ANY)
 	reloadOrders {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -39,7 +39,7 @@ public enum SopActions {
 	
 	@Soplet(
 		description="Delete an existing order (requires chief privileges!)",
-		roles=SopRoles.chief)
+		roles=SopRole.chief)
 	deleteOrder {
 		@Override
 		public void actionPerformed(ActionEvent e) {

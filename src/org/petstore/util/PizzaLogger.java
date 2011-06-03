@@ -2,13 +2,13 @@ package org.petstore.util;
 
 import java.util.logging.Logger;
 
-import org.petstore.soplets.SopExceptions;
+import org.petstore.soplets.SopException;
 
 public class PizzaLogger {
 
 	private static Logger logger = Logger.getAnonymousLogger();
 	
-	public static void log(SopExceptions se, Exception ex) {
+	public static void log(SopException se, Exception ex) {
 		
 		ex.printStackTrace();
 		StringBuffer sb = new StringBuffer();

@@ -2,15 +2,6 @@ package org.petstore.test;
 
 //import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
-import org.petstore.aspects.Artifact;
-import org.petstore.aspects.Testable;
-import org.petstore.dao.DaoOrder;
-import org.petstore.entity.MOrder;
-import org.petstore.soplets.SopDeveloper;
-import org.petstore.soplets.SopRegion;
-import org.petstore.soplets.SopTestSetup;
 
 //@lombok.Soplet(aspects={Artifact.class, Testable.class})
 public enum HPTest {

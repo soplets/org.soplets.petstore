@@ -1,14 +1,18 @@
 package org.petstore.soplets;
 
+import java.lang.annotation.Annotation;
+
 import lombok.soplets.Beanable;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
-import org.petstore.aspects.Beanable2;
+import org.petstore.aspects.Editable;
 import org.petstore.aspects.Translatable;
+import org.petstore.aspects.Validatable;
+import org.petstore.util.BindableEntity;
 
-@Sop(aspects={Artifact.class, Translatable.class, Beanable.class, Beanable2.class})
-public enum SopOrderDetail {
+@Sop(aspects={Artifact.class, Translatable.class, Beanable.class, Validatable.class, Editable.class})
+public enum SopOrderDetail implements BindableEntity {
 
 	@Soplet (
 		textEN = "",
@@ -32,7 +36,7 @@ public enum SopOrderDetail {
 		textDE = "Menge",
 		readOnly = true,
 		description = "The ordered quantity of the product",
-		javaType = Integer.class)
+		javaType = Long.class)
 	quantity,
 
 	@Soplet (
@@ -49,7 +53,9 @@ public enum SopOrderDetail {
 		description = "",
 		readOnly = true,
 		javaType = Double.class)
-	subTotal,
+	subTotal;
 
-
+	public String defaultValue() {
+		return "";  //TODO
+	}
 }

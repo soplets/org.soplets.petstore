@@ -4,10 +4,11 @@ import lombok.soplets.Beanable;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
-import org.petstore.aspects.Beanable2;
+import org.petstore.aspects.Editable;
 import org.petstore.aspects.Translatable;
 
-@Sop(aspects={Artifact.class, Beanable.class, Beanable2.class, Translatable.class})
+@Sop(
+	aspects={Artifact.class, Beanable.class, Editable.class, Translatable.class})
 public enum SopCustomer {
 
 	@Soplet (
