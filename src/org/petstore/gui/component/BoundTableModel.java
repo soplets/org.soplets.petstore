@@ -16,7 +16,7 @@ import javax.swing.table.TableColumnModel;
 import org.petstore.Feature;
 import org.petstore.Feature.DemoFeature;
 import org.petstore.util.BindableEntity;
-import org.petstore.util.PizzaUtil;
+import org.petstore.util.PetStoreUtil;
 
 @DemoFeature(Feature.binding)
 public class BoundTableModel<T> extends AbstractTableModel {
@@ -32,20 +32,17 @@ public class BoundTableModel<T> extends AbstractTableModel {
 	}
 	
 	public boolean isCellEditable(int row, int col) {
-		return true;
+		return !fields.get(col).readOnly();
 	}
 	
-	public void addColumn(BindableEntity field, Object[] values) {
+	public void addColumn(BindableEntity field) {
 		TableColumn column = new TableColumn();
 		column.setHeaderValue(field.toString());
-		column.setWidth(100);
+		column.setPreferredWidth(Number.class.isAssignableFrom(field.javaType()) ? 70 : 250);
 		column.setModelIndex(columnModel.getColumnCount());
-		if (values != null) {
-			final BoundComboBox<?> cbo = new BoundComboBox();
-			for (Object entry : values) {
-				cbo.addItem(entry);
-			}
-			cbo.bind(field);
+		if (Enum.class.isAssignableFrom(field.javaType())) {
+			//we assume a Soplet list
+			BoundComboBox<?> cbo = new BoundComboBox(field.javaType());
 			column.setCellEditor(new DefaultCellEditor(cbo));
 		} else if (Long.class.isAssignableFrom(field.javaType())) {
 			TableCellEditor numberCellEditor = new DefaultCellEditor(new JFormattedTextField(NumberFormat.getIntegerInstance())) {
@@ -67,6 +64,11 @@ public class BoundTableModel<T> extends AbstractTableModel {
 		fields.add(field);
 	}
 
+	@Override
+    public Class getColumnClass(int columnIndex) {
+		return fields.get(columnIndex).javaType();        
+    }
+	
 	public TableColumnModel getColumnModel() {
 		return columnModel;
 	}
@@ -90,13 +92,13 @@ public class BoundTableModel<T> extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		BindableEntity fieldDef = fields.get(col);
 		T entity = data.get(row);
-		return PizzaUtil.extractValue(entity, fieldDef);	
+		return PetStoreUtil.extractValue(entity, fieldDef);	
 	}
 	
 	@Override
 	public void setValueAt(Object o, int row, int col) {
 		BindableEntity fieldDef = fields.get(col);
 		T entity = data.get(row);
-		PizzaUtil.injectValue(entity, fieldDef, o);
+		PetStoreUtil.injectValue(entity, fieldDef, o);
 	}
 }

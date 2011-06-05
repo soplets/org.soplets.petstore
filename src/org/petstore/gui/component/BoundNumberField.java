@@ -7,7 +7,7 @@ import javax.swing.JFormattedTextField;
 import org.petstore.Feature;
 import org.petstore.Feature.DemoFeature;
 import org.petstore.util.BindableEntity;
-import org.petstore.util.PizzaUtil;
+import org.petstore.util.PetStoreUtil;
 
 @DemoFeature(Feature.binding)
 public class BoundNumberField<T> extends JFormattedTextField implements Bindable<T> {
@@ -26,12 +26,12 @@ public class BoundNumberField<T> extends JFormattedTextField implements Bindable
 	}
 
 	public void load(T entity) {
-		setValue(PizzaUtil.extractValue(entity, fieldDef));
+		setValue(PetStoreUtil.extractValue(entity, fieldDef));
 	}
 
 	public void save(T entity) throws IllegalArgumentException {
 		Object value = getValue();
-		PizzaUtil.injectValue(entity, fieldDef, getValue());
+		PetStoreUtil.injectValue(entity, fieldDef, getValue());
 	}
 
 	@Override

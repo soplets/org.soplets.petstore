@@ -15,6 +15,27 @@ public class BoundComboBox<T> extends JComboBox implements Bindable<T> {
 	
 	private BindableEntity field;
 
+	public BoundComboBox() {
+		//empty
+	}
+
+	/**
+	 * Create a new bound combo, with values provided by a Soplet enumeration
+	 *  
+	 * @param javaType must be a Soplet enum class
+	 */
+	public BoundComboBox(Class javaType) {
+		try {
+			Method valuesMethod = javaType.getMethod("values");
+			Object[] valueEntries = (Object[])valuesMethod.invoke(javaType);
+			for (Object entry : valueEntries) {
+				addItem(entry);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void load(T entity) {
 		if (entity == null) {
 			setSelectedItem(null);

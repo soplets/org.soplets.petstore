@@ -8,8 +8,8 @@ import org.hibernate.Session;
 import org.petstore.entity.MOrder;
 import org.petstore.entity.MOrderDetail;
 import org.petstore.soplets.SopException;
-import org.petstore.util.PizzaLogger;
-import org.petstore.util.PizzaUtil;
+import org.petstore.util.PetStoreLogger;
+import org.petstore.util.PetStoreUtil;
 
 
 public class DaoOrder {
@@ -29,7 +29,7 @@ public class DaoOrder {
 	public void saveOrder(MOrder order) {
 		Session session = null;
 		try {
-			session = PizzaUtil.getSessionFactory().openSession();
+			session = PetStoreUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 			for (Object o : order.getDetails()) {
 				MOrderDetail detail = (MOrderDetail)o;
@@ -38,7 +38,7 @@ public class DaoOrder {
 			session.saveOrUpdate(order);
 			session.getTransaction().commit();
 		} catch (Exception ex) {
-			PizzaLogger.log(SopException.EX_0002, ex);
+			PetStoreLogger.log(SopException.EX_0002, ex);
 		} finally {
 			session.close();
 		}
@@ -47,11 +47,11 @@ public class DaoOrder {
 	public List<MOrder> loadOrders() {
 		Session session = null;
 		try {
-			session = PizzaUtil.getSessionFactory().openSession();
+			session = PetStoreUtil.getSessionFactory().openSession();
 	        Criteria c = session.createCriteria(MOrder.class);
 	        return (List<MOrder>)c.list();
 		} catch (Exception ex) {
-			PizzaLogger.log(SopException.EX_0002, ex);
+			PetStoreLogger.log(SopException.EX_0002, ex);
 			return new Vector<MOrder>();
 		} finally {
 			session.close();
@@ -61,10 +61,10 @@ public class DaoOrder {
 	public void delete(MOrder order) {
 		Session session = null;
 		try {
-			session = PizzaUtil.getSessionFactory().openSession();
+			session = PetStoreUtil.getSessionFactory().openSession();
 			session.delete(order);
 		} catch (Exception ex) {
-			PizzaLogger.log(SopException.EX_0002, ex);
+			PetStoreLogger.log(SopException.EX_0002, ex);
 		} finally {
 			session.close();
 		}

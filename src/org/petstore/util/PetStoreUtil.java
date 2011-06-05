@@ -6,13 +6,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 
-public class PizzaUtil {
+public class PetStoreUtil {
 
 	private static SessionFactory sessionFactory;
 	
 	public static void showWarning(ValidationException ve) {
-		// TODO Auto-generated method stub
-		
+		// TODO
 	}
 
 	public static SessionFactory getSessionFactory() {
@@ -26,6 +25,9 @@ public class PizzaUtil {
 		return sessionFactory;		
 	}
 	
+	/**
+	 * retrieve the value of a bound field by using reflection
+	 */
 	public static Object extractValue(Object entity, BindableEntity fieldDef) {
 		if (entity == null) {
 			return null;
@@ -44,6 +46,9 @@ public class PizzaUtil {
 		return null;
 	}
 	
+	/**
+	 * set a new value to bound field by using reflection
+	 */
 	public static void injectValue(Object entity, BindableEntity fieldDef, Object newValue) {
 		Class<?> dataType = fieldDef.javaType();
 		Class<?> clazz = entity.getClass();

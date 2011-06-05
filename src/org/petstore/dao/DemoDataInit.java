@@ -6,15 +6,15 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.petstore.entity.MCustomer;
 import org.petstore.soplets.SopException;
-import org.petstore.util.PizzaLogger;
-import org.petstore.util.PizzaUtil;
+import org.petstore.util.PetStoreLogger;
+import org.petstore.util.PetStoreUtil;
 
 public class DemoDataInit {
 
 	public static void init() {
 		Session session = null;
 		try {
-			session = PizzaUtil.getSessionFactory().openSession();
+			session = PetStoreUtil.getSessionFactory().openSession();
 	        Criteria c = session.createCriteria(MCustomer.class);
 	        List<MCustomer> list = (List<MCustomer>)c.list();
 	        if (list.size() == 0) {
@@ -33,7 +33,7 @@ public class DemoDataInit {
 	        }
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			PizzaLogger.log(SopException.EX_0002, ex);
+			PetStoreLogger.log(SopException.EX_0002, ex);
 		} finally {
 			session.close();
 		}

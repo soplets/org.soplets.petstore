@@ -52,7 +52,7 @@ public enum SopOrder implements BindableEntity, Translatable {
 	@Soplet( 
 		textEN = "Customer",
 		textDE = "Kunde", 
-		description = "The person which ordered the pizza",
+		description = "The person which ordered the pet",
 		readOnly = false,
 		javaType = MCustomer.class,
 		mandatory = true) 

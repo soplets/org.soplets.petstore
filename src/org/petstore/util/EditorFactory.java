@@ -31,7 +31,7 @@ public class EditorFactory {
 			bindable = new BoundComboBox();	
 			Session session = null;
 			try {
-				session = PizzaUtil.getSessionFactory().openSession();
+				session = PetStoreUtil.getSessionFactory().openSession();
 		        Criteria c = session.createCriteria(javaType);
 		        List<MCustomer> list = (List)c.list();
 				for (Object dataEntry : list) {
@@ -43,16 +43,7 @@ public class EditorFactory {
 				session.close();
 			}
 		} else if (Enum.class.isAssignableFrom(javaType)) {
-			bindable = new BoundComboBox();			
-			try {
-				Method valuesMethod = javaType.getMethod("values");
-				Object[] valueEntries = (Object[])valuesMethod.invoke(javaType);
-				for (Object entry : valueEntries) {
-					((BoundComboBox)bindable).addItem(entry);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			bindable = new BoundComboBox(javaType);
 		} else if (Integer.class.isAssignableFrom(javaType)) {
 			bindable = new BoundNumberField();
 		} else {

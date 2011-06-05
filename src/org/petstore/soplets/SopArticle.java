@@ -21,65 +21,71 @@ import org.petstore.soplets.SopArticle.Priceable;
  *  more 'semantically coherent' (strong typed!) and easier to maintain than database
  *  based entities.
  *  
- *  In this specific case of the articles of a pizza delivery service, it has been
- *  proved that the menu items do not change frequently, maybe once in a year, 
+ *  In this specific case of the articles of a Pet Store, it has been
+ *  proved that the items do not change frequently, maybe once in a year, 
  *  as also the marketing materials have to be adapted accordingly etc.
  *  
  *  Furthermore, it has been determined that (due to an agile development process
- *  in place) releasing the software in sync with a menu update is not a big issue.
+ *  in place) releasing the software in sync with a article/price update is not a big issue.
  *  For that reason it has been deemed justifiable to chose the static alternative 
  *  in this case.
  * 
  * @author chrismay
  */
-@Sop(aspects = {Artifact.class, Translatable.class, Priceable.class})
+@Sop(aspects = {Artifact.class, Translatable.class, Priceable.class}) 
 public enum SopArticle {
 
 	@Soplet(
-		textEN = "",
-		textDE = "",
-		description = "",
+		textEN = "Puppy Chow",
+		textDE = "Puppy Chow",
+		description = "Healthy Morsels Soft & Crunchy Bites Puppy Food, 4.40 lb", 
 		price = 6.5f)
-	pizzaMargarita,
+	puppyChow,
 
 	@Soplet(
-		textEN = "",
-		textDE = "",
-		description = "",
-		price = 8.25f)
-	pizzaNapoli,
+		textEN = "Hartz Powdered Milk",
+		textDE = "Hartz Trockenmilch",
+		description = "The new Hartz Precision Nutrition Powdered Milk Replacement " +
+				"for Puppies is formulated to be nutritionally similar to mother's milk",
+		price = 10.00f)
+	hartzPowderedMilk,
 
 	@Soplet(
-		textEN = "",
-		textDE = "",
-		description = "",
-		price = 1.50f)
-	coke,
+		textEN = "6-Day Automatic Pet Feeder",
+		textDE = "6-Tage automtische Tränke",
+		description = "Make sure your pet is well fed your when you're away. The Lentek Automatic Six Days Pet Dish ensures that pets never miss a meal and maintain their normal eating schedule",
+		price = 39.00f)
+	automaticPetFeeder,
 	
 	@Soplet(
-		textEN = "",
-		textDE = "",
-		description = "",
-		price = 1.75f)
-	beerHeineken,
+		textEN = "Kookamunga Catnip Bubbles, 4 oz. Bottle",
+		textDE = "Kookamunga Katzenflocken, 4 oz. Flasche",
+		description = "Watch your kitty go crazy for Kookamunga Catnip bubbles!",
+		price = 4.94f)
+	kookamungaBubbles,
 	
 	@Soplet(
-		textEN = "Friday Combo",
-		textDE = "Freitag's Combo",
-		description = "Special offer for 1 pizza + 1 beverage, only 7.99€ Fridays, 9.99€ the other days")
+		textEN = "Friday Special Combo",
+		textDE = "Freitag's Spzeialangebot",
+		description = "Special offer for 3 Kookamunga Bubbles + 6-Day Automatic Feeder, instead of 53.82$' just 44.44$ - valid only Fridays!")
 	fridayCombo {
-		//@Override
-		public float getPrice() {
+		@Override
+		public double price() {
 			Calendar cal = Calendar.getInstance();
 			if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
-				return 6.99f;
+				return 44.44d;
 			} else {
-				return 7.99f;
+				return 53.82d;
 			}
 		}
 	};
 	
 	public @interface Priceable {
 		public double price() default 0.0;
+	}
+	
+	@Override
+	public String toString() {
+		return textEN();
 	}
 }

@@ -24,6 +24,7 @@ public class BoundTextField<T> extends JTextField implements Bindable<T> {
 		this.fieldDef = fieldDef;
 		setDocument(new TextFieldLimiter(fieldDef.length()));  //set maxLength
 		setColumns(fieldDef.length());
+		setEditable(!fieldDef.readOnly());
 	}
 
 	public void load(T entity) {
@@ -39,9 +40,7 @@ public class BoundTextField<T> extends JTextField implements Bindable<T> {
 		try {
 			Method getter = clazz.getMethod(getterName);
 			Object value = getter.invoke(entity);
-			Class<?> dataType = fieldDef.javaType();
-			String formattedText = value + ""; //TODO dataType.doFormat(value); 
-			setText(formattedText);
+			setText(value == null ? "" : value.toString());
 		} catch (Exception e) {
 			e.printStackTrace(); // TODO Logging
 		}

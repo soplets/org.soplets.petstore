@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import org.petstore.soplets.SopException;
 
-public class PizzaLogger {
+public class PetStoreLogger {
 
 	private static Logger logger = Logger.getAnonymousLogger();
 	

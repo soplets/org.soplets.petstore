@@ -10,4 +10,5 @@ public interface BindableEntity {
 	public Class javaType();
 	public boolean readOnly();
 	public SopValidators validator();
+	public boolean mandatory();
 }

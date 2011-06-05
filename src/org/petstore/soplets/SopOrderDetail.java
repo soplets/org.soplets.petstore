@@ -1,7 +1,5 @@
 package org.petstore.soplets;
 
-import java.lang.annotation.Annotation;
-
 import lombok.soplets.Beanable;
 import lombok.soplets.Sop;
 
@@ -15,47 +13,42 @@ import org.petstore.util.BindableEntity;
 public enum SopOrderDetail implements BindableEntity {
 
 	@Soplet (
-		textEN = "",
-		textDE = "",
-		description = "",
-		readOnly = true,
-		javaType = Double.class)
-//		viewPrivilege=SopPrivilege.viewEarnings)
-	earnings,
-
-	@Soplet (
 		textEN = "Order Text",
 		textDE = "Bestellung",
 		description = "The thing to be ordered",
-		readOnly = true,
 		javaType = SopArticle.class)
 	article,
 
 	@Soplet (
 		textEN = "Quantity",
 		textDE = "Menge",
-		readOnly = true,
 		description = "The ordered quantity of the product",
 		javaType = Long.class)
 	quantity,
 
 	@Soplet (
-		textEN = "",
-		textDE = "",
+		textEN = "Unit price",
+		textDE = "Preis",
 		description = "",
 		readOnly = true,
 		javaType = Double.class)
 	pricePerUnit,
 
 	@Soplet (
-		textEN = "",
-		textDE = "",
+		textEN = "Sub-total",
+		textDE = "Subtotal",
 		description = "",
 		readOnly = true,
 		javaType = Double.class)
 	subTotal;
 
+
 	public String defaultValue() {
 		return "";  //TODO
+	}
+	
+	@Override
+	public String toString() {
+		return textEN();
 	}
 }
