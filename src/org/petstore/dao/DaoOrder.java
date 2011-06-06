@@ -48,8 +48,9 @@ public class DaoOrder {
 		Session session = null;
 		try {
 			session = PetStoreUtil.getSessionFactory().openSession();
-	        Criteria c = session.createCriteria(MOrder.class);
-	        return (List<MOrder>)c.list();
+	        Criteria criteria = session.createCriteria(MOrder.class);
+	        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+	        return (List<MOrder>)criteria.list();
 		} catch (Exception ex) {
 			PetStoreLogger.log(SopException.EX_0002, ex);
 			return new Vector<MOrder>();
@@ -63,6 +64,7 @@ public class DaoOrder {
 		try {
 			session = PetStoreUtil.getSessionFactory().openSession();
 			session.delete(order);
+			session.flush();
 		} catch (Exception ex) {
 			PetStoreLogger.log(SopException.EX_0002, ex);
 		} finally {

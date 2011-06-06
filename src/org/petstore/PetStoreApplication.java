@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -60,8 +63,14 @@ public class PetStoreApplication extends JFrame {
 	
 	public PetStoreApplication() {
 		initGUI();
-		loadOrders();
+		loadAllOrders();
 		setVisible(true);
+		addWindowListener(new WindowAdapter() {			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 	}
 
 	/**
@@ -76,7 +85,7 @@ public class PetStoreApplication extends JFrame {
 				
 		@DemoFeature(Feature.binding)
 		Bindable component = EditorFactory.getEditor(field);
-		pnlOrders.add((JComponent)component, new GridBagConstraints(1, row, 1, 1, 1.0, 0.0, west, GridBagConstraints.BOTH, insets, 3, 3));
+		pnlOrders.add((JComponent)component, new GridBagConstraints(1, row, 2, 1, 1.0, 0.0, west, GridBagConstraints.BOTH, insets, 3, 3));
 		
 		boundComponents.add(component);
 		return component;
@@ -93,7 +102,17 @@ public class PetStoreApplication extends JFrame {
 		mdlOrders.addElement(order);
 		lstOrders.setSelectedIndex(mdlOrders.getSize() - 1); 
 	}
-	
+
+	/**
+	 * Create a new order
+	 */
+	private void btnDeleteOrderClicked() {
+		MOrder order = getSelectedOrder();
+		daoOrder.delete(order);
+		loadAllOrders();
+		
+	}
+
 	/**
 	 * Create a new order detail entry
 	 */
@@ -172,7 +191,6 @@ public class PetStoreApplication extends JFrame {
 			if (RolesUtil.hasPrivilege(SopPrivilege.viewEarnings)) {
 				addEditRow(SopOrder.earnings, row++);  //read-only
 			}
-
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -199,7 +217,16 @@ public class PetStoreApplication extends JFrame {
 			}
 		});
 		pnlOrders.add(btnSave, new GridBagConstraints(1, row, 1, 1, 0, 0, west, 0, insets, 3, 3));
-		
+
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnDeleteOrderClicked();
+			}
+		});
+		pnlOrders.add(btnDelete, new GridBagConstraints(2, row, 1, 1, 0, 0, west, 0, insets, 3, 3));
+
 		JButton btnNewEntry = new JButton("New Entry");
 		btnNewEntry.addActionListener(new ActionListener() {
 			@Override
@@ -207,7 +234,7 @@ public class PetStoreApplication extends JFrame {
 				btnNewEntryClicked();
 			}
 		});
-		pnlOrders.add(btnNewEntry, new GridBagConstraints(2, row++, 1, 1, 0, 0, west, 0, insets, 3, 3));
+		pnlOrders.add(btnNewEntry, new GridBagConstraints(3, row++, 1, 1, 0, 0, west, 0, insets, 3, 3));
 
 		return pnlOrders;
 	}
@@ -236,7 +263,8 @@ public class PetStoreApplication extends JFrame {
 	 * Load all orders from the database, and populate the
 	 * list with these values
 	 */
-	private void loadOrders() {
+	private void loadAllOrders() {
+		mdlOrders.clear();
 		List<MOrder> orders = daoOrder.loadOrders();
 		for (MOrder order : orders) {
 			mdlOrders.addElement(order);
@@ -267,13 +295,13 @@ public class PetStoreApplication extends JFrame {
 			for (Bindable<MOrder> bindable : boundComponents) {
 				BindableEntity boundField = bindable.getBoundField();
 				if (!boundField.readOnly()) {
-					bindable.save(order);
+					bindable.save(order);  //apply the value to the entity
 				}
 			}
 		} catch (ValidationException ve) {
 			PetStoreUtil.showWarning(ve);
 			return;
 		}
-		daoOrder.saveOrder(order);
+		daoOrder.saveOrder(order);  //store to database
 	}
 }
