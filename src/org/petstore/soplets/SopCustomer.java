@@ -12,7 +12,7 @@ import org.petstore.aspects.Translatable;
 public enum SopCustomer {
 
 	@Soplet (
-		textEN = "Zip code",
+		
 		textDE = "PLZ", 
 		description = "The postal code of the place where the customer lives",
 		javaType = String.class,

@@ -1,4 +1,4 @@
-package org.petstore;
+package org.petstore.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,6 +27,7 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.petstore.Feature;
 import org.petstore.Feature.DemoFeature;
 import org.petstore.dao.DaoOrder;
 import org.petstore.dao.DemoDataInit;
@@ -45,12 +46,12 @@ import org.petstore.util.PetStoreUtil;
 import org.petstore.util.RolesUtil;
 import org.petstore.util.ValidationException;
 
-public class PetStoreApplication extends JFrame {
+public class MainWindowPetStore extends JFrame {
 
 	
 	public static void main(String... args) {		
 		DemoDataInit.init();
-		new PetStoreApplication();
+		new MainWindowPetStore();
 	}
 	
 	private static final long serialVersionUID = 1L;
@@ -61,7 +62,7 @@ public class PetStoreApplication extends JFrame {
 	private JPanel pnlOrders;
 	private BoundTableModel<MOrderDetail> tbmOrderDetails;
 	
-	public PetStoreApplication() {
+	public MainWindowPetStore() {
 		initGUI();
 		loadAllOrders();
 		setVisible(true);

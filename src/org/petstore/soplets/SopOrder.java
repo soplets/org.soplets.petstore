@@ -19,7 +19,7 @@ import org.petstore.entity.MOrderDetail;
 import org.petstore.util.BindableEntity;
 
 @Sop(aspects={Artifact.class, Beanable.class, Editable.class, Validatable.class, Translatable.class})
-public enum SopOrder implements BindableEntity, Translatable {  
+public enum SopOrder implements BindableEntity {  
  
 	@Soplet(
 		textEN = "Address",
@@ -91,9 +91,5 @@ public enum SopOrder implements BindableEntity, Translatable {
 	
 	public String defaultValue() {
 		return "";  //TODO
-	}
-
-	public Class annotationType() {
-		return null;
 	}
 }

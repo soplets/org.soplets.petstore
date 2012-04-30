@@ -3,8 +3,8 @@ package org.petstore.soplets;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
+import org.petstore.aspects.Regionable;
 import org.petstore.aspects.Translatable;
-import org.petstore.soplets.SopRegion.Regionable;
 
 @Sop(aspects = {Artifact.class, Translatable.class, Regionable.class})
 public enum SopRegion {
@@ -42,20 +42,5 @@ public enum SopRegion {
 	
 	public double getSurcharge(int distance) {
 		return surcharge();
-	}
-
-	/**
-	 * describes extra properties for a region type
-	 */
-	public static @interface Regionable {
-		
-		public double minimumDelivery() default 0;
-		
-		/**
-		 * The surcharge for delivery, dependant on the region and distance of the customer"
-		 */
-		public double surcharge() default 0; 
-
-		//public HPTest testCase() default HPTest.NONE;
 	}
 }

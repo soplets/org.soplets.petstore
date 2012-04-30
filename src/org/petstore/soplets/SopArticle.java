@@ -5,8 +5,8 @@ import java.util.Calendar;
 import lombok.soplets.Sop;
 
 import org.petstore.aspects.Artifact;
+import org.petstore.aspects.Priceable;
 import org.petstore.aspects.Translatable;
-import org.petstore.soplets.SopArticle.Priceable;
 
 
 /**
@@ -79,10 +79,6 @@ public enum SopArticle {
 			}
 		}
 	};
-	
-	public @interface Priceable {
-		public double price() default 0.0;
-	}
 	
 	@Override
 	public String toString() {

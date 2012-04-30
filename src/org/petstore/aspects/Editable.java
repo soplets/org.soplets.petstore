@@ -1,5 +1,7 @@
 package org.petstore.aspects;
 
+import lombok.soplets.Beanable;
+
 public @interface Editable {
 
 	/**
